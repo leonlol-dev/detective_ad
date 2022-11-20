@@ -6,7 +6,13 @@ public class AnimationSceneController : MonoBehaviour
 {
     public Animator[] animators;
     private bool pause;
-    public bool cannotForward;
+    private bool forward;
+    public bool cannotForward; //this should be renamed to play but oh well
+
+    private void Start()
+    {
+        forward = true;
+    }
 
     private void Update()
     {
@@ -16,7 +22,10 @@ public class AnimationSceneController : MonoBehaviour
             foreach (var animator in animators)
             {
                 animator.SetFloat("timeMultiplier", 1);
+                
             }
+
+            forward = true;
         }
 
         //backwards
@@ -31,21 +40,40 @@ public class AnimationSceneController : MonoBehaviour
             {
                 animator.SetFloat("timeMultiplier", -1);
             }
+
+            forward = false;
         }
 
         //pause/play
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            //play
             if (pause == true)
             {
                 pause = false;
-                foreach (var animator in animators)
-                {
-                    animator.SetFloat("timeMultiplier", 1);
 
+                if(forward)
+                {
+                    foreach (var animator in animators)
+                    {
+                        animator.SetFloat("timeMultiplier", 1);
+
+                    }
                 }
+
+                else if (!forward)
+                {
+                    foreach (var animator in animators)
+                    {
+                        animator.SetFloat("timeMultiplier", -1);
+
+                    }
+                }
+                
             }
 
+
+            //pause
             else
             {
                 pause = true;
@@ -79,3 +107,6 @@ public class AnimationSceneController : MonoBehaviour
         animator.SetBool("reverse", false);
     }
 }
+
+//NOTES
+//IF I WANT MULTIPLE ITEMS WITH TIME/ANIMATION MULTIPLATION I NEED TO ADD ANIMATION EVENTS TO ALL ANIMATION FILES.
