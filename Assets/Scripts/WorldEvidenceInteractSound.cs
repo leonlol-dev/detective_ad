@@ -5,5 +5,5 @@ using UnityEngine;
 public class WorldEvidenceInteractSound : MonoBehaviour
 {
     public AudioClip clip;
-    
+    public string subtitles;
 }

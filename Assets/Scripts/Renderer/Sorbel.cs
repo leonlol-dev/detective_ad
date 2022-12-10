@@ -12,6 +12,24 @@ public sealed class Sorbel : CustomPostProcessVolumeComponent, IPostProcessCompo
     [Tooltip("Colour of the outline.")]
     public ColorParameter outlineColor  = new ColorParameter(Color.black);
 
+    [Tooltip("Outline thickness")]
+    public FloatParameter outlineThickness = new FloatParameter(1f);
+
+    [Tooltip("Scales the depth calculation linearly")]
+    public FloatParameter depthMultiplier = new FloatParameter(1f);
+
+    [Tooltip("Depth bias scaled to the depth value")]
+    public FloatParameter depthBias = new FloatParameter(1f);
+
+    [Tooltip("Scales the normal calculation linearly")]
+    public FloatParameter normalMultiplier = new FloatParameter(1f);
+
+    [Tooltip("normal bias scaled to the normal value")]
+    public FloatParameter normalBias = new FloatParameter(1f);
+
+
+
+
     Material m_Material;
 
     public bool IsActive() => m_Material != null && intensity.value > 0f;
@@ -35,6 +53,12 @@ public sealed class Sorbel : CustomPostProcessVolumeComponent, IPostProcessCompo
             return;
 
         m_Material.SetFloat("_Intensity", intensity.value);
+        m_Material.SetColor("_Color", outlineColor.value);
+        m_Material.SetFloat("_Thickness", outlineThickness.value);
+        m_Material.SetFloat("_DepthMultiplier", depthMultiplier.value);
+        m_Material.SetFloat("_DepthBias", depthBias.value);
+        m_Material.SetFloat("_NormalMultiplier", normalMultiplier.value);
+        m_Material.SetFloat("_NormalBias", normalBias.value);
         m_Material.SetTexture("_InputTexture", source);
         HDUtils.DrawFullScreen(cmd, m_Material, destination);
     }
