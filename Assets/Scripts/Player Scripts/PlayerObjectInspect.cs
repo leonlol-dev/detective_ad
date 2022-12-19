@@ -5,13 +5,14 @@ using UnityEngine;
 public class PlayerObjectInspect : MonoBehaviour
 {
     public Camera cam;
+    public InventoryManager inventoryManager;
     public float interactRange;
     public List<GameObject> worldEvidenceFolder;
-    public List<AudioClip> audioClips;
+    
 
     private GameObject player;
     private AudioSource audioSource;
-
+    private Evidence evidence;
 
     // Start is called before the first frame update
     void Start()
@@ -49,6 +50,12 @@ public class PlayerObjectInspect : MonoBehaviour
                     PlayInteractionSpeech(evidence.GetComponent<WorldEvidenceInteractSound>().clip);
                 }
 
+            }
+
+            if(hit.collider.gameObject.tag == "InventoryEvidence")
+            {
+                inventoryManager.AddEvidence(hit.collider.gameObject.GetComponent<ItemController>().evidenceItem);
+                Destroy(hit.collider.gameObject);
             }
         }
     }

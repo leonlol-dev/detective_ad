@@ -5,13 +5,12 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "EvidenceItem")]
 public class Evidence : ScriptableObject
 {
-    string evidenceName;
-    int itemId;
+    public string evidenceName;
+    public int itemId;
+    public Sprite icon;
     public GameObject itemPrefab;
 
-    public string getEvidenceName {  get { return evidenceName; } }
-    public int getEvidenceId { get { return itemId; } }
-    public GameObject getItemPrefab { get { return itemPrefab; } }
+  
 
     
 
