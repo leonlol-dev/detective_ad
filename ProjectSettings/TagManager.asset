@@ -6,6 +6,7 @@ TagManager:
   tags:
   - WorldEvidence
   - InventoryEvidence
+  - Inventory
   layers:
   - Default
   - TransparentFX
