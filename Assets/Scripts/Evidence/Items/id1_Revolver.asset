@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9871b86c52c220847a8bd47c0036d324, type: 3}
-  m_Name: Bullet1
+  m_Name: id1_Revolver
   m_EditorClassIdentifier: 
-  evidenceName: Bullet Casing
-  itemId: 0
-  icon: {fileID: 21300000, guid: d4d4576802227e842870847360d2ba74, type: 3}
-  itemPrefab: {fileID: 2004767813229516567, guid: da9e5edc6d8623d48a54e573518be1d7, type: 3}
+  evidenceName: Colt Revolver
+  itemId: 1
+  icon: {fileID: 21300000, guid: 52e6c55596ac5e541bceb7b3b32cc93f, type: 3}
+  itemPrefab: {fileID: 930625385026573165, guid: d0b55ebf1d6ef1b499b7f45b5d8f1e5e, type: 3}

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9871b86c52c220847a8bd47c0036d324, type: 3}
-  m_Name: Revolver
+  m_Name: id3_Box
   m_EditorClassIdentifier: 
-  evidenceName: Colt Revolver
-  itemId: 1
-  icon: {fileID: 21300000, guid: 52e6c55596ac5e541bceb7b3b32cc93f, type: 3}
-  itemPrefab: {fileID: 930625385026573165, guid: d0b55ebf1d6ef1b499b7f45b5d8f1e5e, type: 3}
+  evidenceName: Box
+  itemId: 2
+  icon: {fileID: 21300000, guid: 2f9f2af478b2195419799abe1a2e16f0, type: 3}
+  itemPrefab: {fileID: 2773254029012054338, guid: 57d6e2287fa2d1b4ea23ac7f2a3134c8, type: 3}
