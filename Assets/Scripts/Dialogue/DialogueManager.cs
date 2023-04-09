@@ -37,6 +37,12 @@ public class DialogueManager : MonoBehaviour
 
     private void Update()
     {
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            ExitDialogueMode();
+        }
+
         // If you are looking for the mouse lock feature,
         // save yourself the headache and look for the Player Camera script.
 
