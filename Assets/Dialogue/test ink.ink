@@ -32,4 +32,11 @@ Yes, you are correct. Well done.
 - else:
 Nope. You stink.
 }
--> END
+
+Anyway here is another question: maccies or kfc
+* kfc
+    oh i love me some chicken
+    ->END
+* maccies
+    yess sir 
+    -> END

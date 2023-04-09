@@ -13,13 +13,17 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private GameObject[] choices;
+    [SerializeField] private float textSpeed = 0.25f;
     private TextMeshProUGUI[] choicesText;
 
     private Story currentStory;
+    private Coroutine anim;
+
     public bool dialogueIsPlaying{ get; private set; }
      
     private void Start()
     {
+
         ExitDialogueMode();
 
         choicesText = new TextMeshProUGUI[choices.Length];
@@ -62,6 +66,16 @@ public class DialogueManager : MonoBehaviour
 
     }
 
+    private IEnumerator PlayTextAnimation(string text)
+    {
+        // This plays animation like a typing animation.
+        foreach (char c in text)
+        {
+            dialogueText.text += c;
+            yield return new WaitForSeconds(textSpeed);   
+        } 
+    }
+
     private void ExitDialogueMode()
     {
         dialogueIsPlaying = false;
@@ -71,9 +85,19 @@ public class DialogueManager : MonoBehaviour
 
     private void ContinueStory()
     {
+        //Stops the coroutine animation, if player skips dialogue.
+        if (dialogueText.text.Length < currentStory.currentText.Length)
+        {
+            StopCoroutine(anim);
+        }
+
+        //Clears the text box contents and starts to play animation for the current
+        //story and displays choices if needs.
         if (currentStory.canContinue)
         {
-            dialogueText.text = currentStory.Continue();
+            dialogueText.text = "";
+            //dialogueText.text = currentStory.Continue();
+            anim = StartCoroutine(PlayTextAnimation(currentStory.Continue()));
             DisplayChoices();
         }
 
@@ -114,6 +138,8 @@ public class DialogueManager : MonoBehaviour
         yield return new WaitForEndOfFrame();
         EventSystem.current.SetSelectedGameObject(choices[0].gameObject);
     }
+
+
 
     public void MakeChoice(int choiceIndex)
     {

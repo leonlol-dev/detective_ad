@@ -46,6 +46,7 @@ public class PlayerCamera : MonoBehaviour
 
     private void LateUpdate()
     {
+        //WHY IS THIS HARDCODED, need to properly set this up
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             if (mouseLock)
