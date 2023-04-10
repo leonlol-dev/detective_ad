@@ -97,6 +97,7 @@ public class DialogueManager : MonoBehaviour
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
         dialogueText.text = "";
+        audioSource.Stop();
     }
 
     private void ContinueStory()
