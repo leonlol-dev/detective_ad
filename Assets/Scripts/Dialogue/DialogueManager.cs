@@ -10,12 +10,30 @@ public class DialogueManager : MonoBehaviour
 {
     //Mouse
     [SerializeField] private PlayerMove playerMovement;
+
+    //UI
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private GameObject[] choices;
-    [SerializeField] private float textSpeed = 0.25f;
     private TextMeshProUGUI[] choicesText;
 
+    //Audio
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip dialogueAudioClip;
+    [SerializeField] private bool stopAudioSource;
+
+    //For every number of characters play a sound. 
+    [SerializeField] private int soundFrequency = 2;
+
+    [Range(-3,3)]
+    [SerializeField] private float minPitch = 0.5f;
+    [Range(-3, 3)]
+    [SerializeField] private float maxPitch = 3f;
+
+    //Animation
+    [SerializeField] private float textSpeed = 0.25f;
+    
+    //Private variables
     private Story currentStory;
     private Coroutine anim;
 
@@ -23,7 +41,7 @@ public class DialogueManager : MonoBehaviour
      
     private void Start()
     {
-
+        audioSource = GetComponent<AudioSource>();
         ExitDialogueMode();
 
         choicesText = new TextMeshProUGUI[choices.Length];
@@ -72,15 +90,7 @@ public class DialogueManager : MonoBehaviour
 
     }
 
-    private IEnumerator PlayTextAnimation(string text)
-    {
-        // This plays animation like a typing animation.
-        foreach (char c in text)
-        {
-            dialogueText.text += c;
-            yield return new WaitForSeconds(textSpeed);   
-        } 
-    }
+
 
     private void ExitDialogueMode()
     {
@@ -150,5 +160,29 @@ public class DialogueManager : MonoBehaviour
     public void MakeChoice(int choiceIndex)
     {
         currentStory.ChooseChoiceIndex(choiceIndex);
+    }
+
+    private IEnumerator PlayTextAnimation(string text)
+    {
+        // This plays animation like a typing animation.
+        foreach (char c in text)
+        {
+            PlayDialogueSound(c);
+            dialogueText.text += c;
+            yield return new WaitForSeconds(textSpeed);
+        }
+    }
+
+    private void PlayDialogueSound(int displayedTextAmount)
+    {
+        if(displayedTextAmount % soundFrequency == 0)
+        {
+            if (stopAudioSource)
+            {
+                audioSource.Stop();
+            }
+            audioSource.pitch = Random.Range(minPitch, maxPitch);
+            audioSource.PlayOneShot(dialogueAudioClip);
+        }
     }
 }
