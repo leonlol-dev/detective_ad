@@ -9,6 +9,8 @@ public class DialogueTrigger : MonoBehaviour
     //Ink file
     [SerializeField] private TextAsset inkJSON;
 
+    [SerializeField] private DialogueVoice voice;
+
     //Dialogue Manager
     private DialogueManager dialogueManager;
 
@@ -31,7 +33,7 @@ public class DialogueTrigger : MonoBehaviour
         {
             if(Input.GetKeyDown(KeyCode.E))
             {
-                dialogueManager.EnterDialogueMode(inkJSON);
+                dialogueManager.EnterDialogueMode(inkJSON, voice);
             }
         }
     }

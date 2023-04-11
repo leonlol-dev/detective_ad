@@ -338,7 +338,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &50609748
 GameObject:
@@ -387,7 +387,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &51032464
 GameObject:
@@ -1396,7 +1396,7 @@ Transform:
   m_Children:
   - {fileID: 768617295}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &428541494
 GameObject:
@@ -1460,7 +1460,7 @@ Transform:
   - {fileID: 940015124}
   - {fileID: 1455936402}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 178.534, z: 0}
 --- !u!114 &428541498
 MonoBehaviour:
@@ -2208,6 +2208,7 @@ GameObject:
   - component: {fileID: 535482609}
   - component: {fileID: 535482610}
   - component: {fileID: 535482611}
+  - component: {fileID: 535482612}
   m_Layer: 0
   m_Name: Trigger
   m_TagString: Untagged
@@ -2243,6 +2244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inkJSON: {fileID: 4900000, guid: 276ba184e7a8ebf45bc1ad4d0605ce95, type: 3}
+  voice: {fileID: 535482612}
   playerInRange: 0
 --- !u!135 &535482611
 SphereCollider:
@@ -2257,6 +2259,24 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 2.7
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &535482612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535482608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de2d9bd6d5198c24b81bafd2a6618380, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundFrequency: 2
+  minPitch: 0.5
+  maxPitch: 0.75
+  clips:
+  - {fileID: 8300000, guid: 6f5afdc231145064396a574425e2e001, type: 3}
+  - {fileID: 8300000, guid: 37218feacff023243808032396067c24, type: 3}
 --- !u!1 &590576658 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c2b435a7cdbac7a41a7f259bf6d4dd3f, type: 3}
@@ -2585,7 +2605,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &730120093
 MonoBehaviour:
@@ -2608,11 +2628,16 @@ MonoBehaviour:
   - {fileID: 519488117}
   - {fileID: 485325499}
   audioSource: {fileID: 0}
-  dialogueAudioClip: {fileID: 8300000, guid: 6f5afdc231145064396a574425e2e001, type: 3}
   stopAudioSource: 0
+  clips: []
+  dialogueAudioClip: {fileID: 8300000, guid: 6f5afdc231145064396a574425e2e001, type: 3}
   soundFrequency: 2
   minPitch: 0.5
   maxPitch: 3
+  defaultClips: []
+  defaultSoundFrequency: 2
+  defaultMinPitch: 0.5
+  defaultMaxPitch: 3
   textSpeed: 0.03
 --- !u!82 &730120094
 AudioSource:
@@ -2721,6 +2746,7 @@ GameObject:
   - component: {fileID: 768617295}
   - component: {fileID: 768617297}
   - component: {fileID: 768617296}
+  - component: {fileID: 768617298}
   m_Layer: 0
   m_Name: Trigger
   m_TagString: Untagged
@@ -2756,6 +2782,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inkJSON: {fileID: 4900000, guid: 3189b2977dbadf7419b3df91773ca72c, type: 3}
+  voice: {fileID: 768617298}
   playerInRange: 0
 --- !u!135 &768617297
 SphereCollider:
@@ -2770,6 +2797,23 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.26
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &768617298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 768617294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de2d9bd6d5198c24b81bafd2a6618380, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundFrequency: 1
+  minPitch: 0.5
+  maxPitch: 3
+  clips:
+  - {fileID: 8300000, guid: 37218feacff023243808032396067c24, type: 3}
 --- !u!1 &809514679
 GameObject:
   m_ObjectHideFlags: 0
@@ -2801,7 +2845,7 @@ Transform:
   - {fileID: 657215239}
   - {fileID: 1719213097}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &830270450
 GameObject:
@@ -3563,7 +3607,7 @@ Transform:
   m_Children:
   - {fileID: 2022976931}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1288681671
 MonoBehaviour:
@@ -3778,7 +3822,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1455936401
 GameObject:
@@ -3907,7 +3951,7 @@ RectTransform:
   - {fileID: 830270451}
   - {fileID: 458405808}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4306,7 +4350,7 @@ Transform:
   - {fileID: 1247698763}
   - {fileID: 1376738242}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1855115044
 GameObject:
@@ -4608,7 +4652,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1933402349
 GameObject:
@@ -4990,7 +5034,7 @@ Transform:
   m_Children:
   - {fileID: 57199555}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1995613445
 GameObject:
@@ -5023,7 +5067,7 @@ Transform:
   - {fileID: 169607039}
   - {fileID: 712766023}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2002523836
 GameObject:
@@ -7267,7 +7311,7 @@ Transform:
   - {fileID: 535482609}
   - {fileID: 1351650242}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7710568925907382785
 GameObject:

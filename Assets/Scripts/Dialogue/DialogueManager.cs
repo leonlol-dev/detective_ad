@@ -19,23 +19,41 @@ public class DialogueManager : MonoBehaviour
 
     //Audio
     [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip dialogueAudioClip;
+    
     [SerializeField] private bool stopAudioSource;
+
+    //Audio clips
+    [SerializeField] private AudioClip[] clips;
+    [SerializeField] private AudioClip dialogueAudioClip;
 
     //For every number of characters play a sound. 
     [SerializeField] private int soundFrequency = 2;
 
-    [Range(-3,3)]
+    //Pitch
+    [Range(-3, 3)]
     [SerializeField] private float minPitch = 0.5f;
     [Range(-3, 3)]
     [SerializeField] private float maxPitch = 3f;
 
+
+
+    //Default Audio
+    //(if the character has not set up a voice script it will default to this.)
+    [SerializeField] private AudioClip[] defaultClips;
+    [SerializeField] private int defaultSoundFrequency = 2;
+    [Range(-3, 3)]
+    [SerializeField] private float defaultMinPitch = 0.5f;
+    [Range(-3, 3)]
+    [SerializeField] private float defaultMaxPitch = 3f;
+
     //Animation
     [SerializeField] private float textSpeed = 0.25f;
-    
+
+
     //Private variables
     private Story currentStory;
     private Coroutine anim;
+    
 
     public bool dialogueIsPlaying{ get; private set; }
      
@@ -80,8 +98,18 @@ public class DialogueManager : MonoBehaviour
 
     }
 
-    public void EnterDialogueMode(TextAsset inkJSON)
+    public void EnterDialogueMode(TextAsset inkJSON, DialogueVoice voice)
     {
+        if(voice != null)
+        {
+            setVoice(voice);   
+        }
+
+        else
+        {
+            setDefaultVoice();
+        }
+
         currentStory = new Story(inkJSON.text);
 
         dialogueIsPlaying = true;
@@ -94,6 +122,7 @@ public class DialogueManager : MonoBehaviour
 
     private void ExitDialogueMode()
     {
+        audioSource.Stop();
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
         dialogueText.text = "";
@@ -183,7 +212,32 @@ public class DialogueManager : MonoBehaviour
                 audioSource.Stop();
             }
             audioSource.pitch = Random.Range(minPitch, maxPitch);
-            audioSource.PlayOneShot(dialogueAudioClip);
-        }
+            audioSource.PlayOneShot(clips[Random.RandomRange(0, clips.Length)]);
+        } 
+    }
+
+    public void setVoice(AudioClip[] _clips, int _soundFrequency, int _minPitch, int _maxPitch)
+    {
+        clips = _clips;
+        soundFrequency = _soundFrequency;
+        minPitch = _minPitch;
+        maxPitch = _maxPitch;
+    }
+
+    public void setVoice (DialogueVoice _voice)
+    {
+        clips = _voice.clips;
+        soundFrequency = _voice.soundFrequency;
+        minPitch = _voice.minPitch;
+        maxPitch = _voice.maxPitch;
+    }
+
+    private void setDefaultVoice()
+    {
+        clips = defaultClips;
+        soundFrequency = defaultSoundFrequency;
+        minPitch = defaultMinPitch;
+        maxPitch = defaultMaxPitch;
+
     }
 }
