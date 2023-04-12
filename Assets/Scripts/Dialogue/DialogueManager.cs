@@ -35,6 +35,8 @@ public class DialogueManager : MonoBehaviour
     [Range(-3, 3)]
     [SerializeField] private float maxPitch = 3f;
 
+    //Player
+    [SerializeField] private PlayerObjectInspect playerInspect;
 
 
     //Default Audio
@@ -49,6 +51,10 @@ public class DialogueManager : MonoBehaviour
     //Animation
     [SerializeField] private float textSpeed = 0.25f;
 
+    //Raycast 
+    [SerializeField] private Camera cam;
+    [SerializeField] private float rayCastRange = 1.0f;
+
 
     //Private variables
     private Story currentStory;
@@ -59,6 +65,7 @@ public class DialogueManager : MonoBehaviour
      
     private void Start()
     {
+
         audioSource = GetComponent<AudioSource>();
         ExitDialogueMode();
 
@@ -73,14 +80,17 @@ public class DialogueManager : MonoBehaviour
 
     private void Update()
     {
+        RaycastHit hit;
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, rayCastRange))
+        {
 
-        if(Input.GetKeyDown(KeyCode.Escape))
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             ExitDialogueMode();
         }
 
-        // If you are looking for the mouse lock feature,
-        // save yourself the headache and look for the Player Camera script.
 
         if(!dialogueIsPlaying)
         {
