@@ -53,7 +53,7 @@ public class DialogueManager : MonoBehaviour
 
     //Raycast 
     [SerializeField] private Camera cam;
-    [SerializeField] private float rayCastRange = 1.0f;
+    [SerializeField] private float rayCastRange = 2.0f;
 
 
     //Private variables
