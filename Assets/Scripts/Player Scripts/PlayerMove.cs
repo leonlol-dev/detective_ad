@@ -13,6 +13,7 @@ public class PlayerMove : MonoBehaviour
     public LayerMask groundLayer;
     bool grounded;
     
+    public bool canMove { get; set; }
 
     public Transform orientation;
 
@@ -25,6 +26,7 @@ public class PlayerMove : MonoBehaviour
     {
         rb  = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+        canMove = true;
     }
 
     private void Update()
@@ -49,7 +51,10 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+        if (canMove)
+        {
+            Move();
+        }
     }
 
     private void GetInput()

@@ -46,31 +46,34 @@ public class PlayerCamera : MonoBehaviour
 
     private void LateUpdate()
     {
+        //WHY IS THIS HARDCODED, need to properly set this up
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             if (mouseLock)
             {
-                mouseLock = false;
+                
                 Debug.Log("release the mouse");
                 ReleaseMouse();
             }
             else 
             {
-                mouseLock = true;
+                
                 LockMouse();
             }
             
         }
 
     }
-    private void ReleaseMouse()
+    public void ReleaseMouse()
     {
+        mouseLock = false;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
     }
 
-    private void LockMouse()
+    public void LockMouse()
     {
+        mouseLock = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
