@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -21,6 +22,18 @@ public class PlayerMove : MonoBehaviour
     private float verticalInput;
     private Vector3 moveDirection;
     private Rigidbody rb;
+
+    [Header("Steps")]
+    //steps variables
+    public GameObject stepRayHeight;
+    public GameObject stepRayLower;
+    public GameObject playerCapsule;
+
+    public Transform camTransform;
+
+    public float stepSmooth = 0.1f;
+
+    Vector3 trueforward = new Vector3(1f, 0, 0);
 
     private void Start()
     {
@@ -47,6 +60,10 @@ public class PlayerMove : MonoBehaviour
             rb.drag = 0;
         }
 
+        //Trying to clamp camera rotate to match player capsule. Currently rotates the player, but not fitting with camera
+        float playerRotate = camTransform.transform.rotation.y;
+        playerCapsule.transform.Rotate(0.0f, playerRotate, 0.0f);
+
     }
 
     private void FixedUpdate()
@@ -55,6 +72,7 @@ public class PlayerMove : MonoBehaviour
         {
             Move();
         }
+        Steps();
     }
 
     private void GetInput()
@@ -78,6 +96,22 @@ public class PlayerMove : MonoBehaviour
         {
             Vector3 limitedVel = flatVel.normalized * moveSpeed;
             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+        }
+    }
+
+    void Steps()
+    {
+        //Steps section, player can step up when ray hits lower cast, but not upper
+        RaycastHit hitLower;
+        Debug.DrawRay(stepRayLower.transform.position, (transform.TransformDirection(trueforward)*0.3f),Color.green);
+        if (Physics.Raycast(stepRayLower.transform.position, transform.TransformDirection(trueforward), out hitLower, 0.3f))
+        {
+            RaycastHit hitHigher;
+            Debug.DrawRay(stepRayHeight.transform.position, (transform.TransformDirection(trueforward) * 0.8f), Color.red);
+            if (!Physics.Raycast(stepRayHeight.transform.position, transform.TransformDirection(trueforward), out hitHigher, 0.8f))
+            {
+                rb.position -= new Vector3(0f, -stepSmooth, 0f);
+            }
         }
     }
     
