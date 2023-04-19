@@ -29,11 +29,12 @@ public class PlayerMove : MonoBehaviour
     public GameObject stepRayLower;
     public GameObject playerCapsule;
 
+
     public Transform camTransform;
 
     public float stepSmooth = 0.1f;
 
-    Vector3 trueforward = new Vector3(1f, 0, 0);
+
 
     private void Start()
     {
@@ -61,8 +62,8 @@ public class PlayerMove : MonoBehaviour
         }
 
         //Trying to clamp camera rotate to match player capsule. Currently rotates the player, but not fitting with camera
-        float playerRotate = camTransform.transform.rotation.y;
-        playerCapsule.transform.Rotate(0.0f, playerRotate, 0.0f);
+        //float playerRotate = camTransform.transform.rotation.y;
+        //transform.Rotate(0.0f, playerRotate, 0.0f);
 
     }
 
@@ -71,8 +72,9 @@ public class PlayerMove : MonoBehaviour
         if (canMove)
         {
             Move();
+            Steps();
         }
-        Steps();
+        
     }
 
     private void GetInput()
@@ -103,12 +105,12 @@ public class PlayerMove : MonoBehaviour
     {
         //Steps section, player can step up when ray hits lower cast, but not upper
         RaycastHit hitLower;
-        Debug.DrawRay(stepRayLower.transform.position, (transform.TransformDirection(trueforward)*0.3f),Color.green);
-        if (Physics.Raycast(stepRayLower.transform.position, transform.TransformDirection(trueforward), out hitLower, 0.3f))
+        Debug.DrawRay(stepRayLower.transform.position, (transform.TransformDirection(-orientation.forward)*0.5f),Color.green);
+        if (Physics.Raycast(stepRayLower.transform.position, transform.TransformDirection(-orientation.forward), out hitLower, 0.5f))
         {
             RaycastHit hitHigher;
-            Debug.DrawRay(stepRayHeight.transform.position, (transform.TransformDirection(trueforward) * 0.8f), Color.red);
-            if (!Physics.Raycast(stepRayHeight.transform.position, transform.TransformDirection(trueforward), out hitHigher, 0.8f))
+            Debug.DrawRay(stepRayHeight.transform.position, (transform.TransformDirection(-orientation.forward) * 1f), Color.red);
+            if (!Physics.Raycast(stepRayHeight.transform.position, transform.TransformDirection(-orientation.forward), out hitHigher, 1f))
             {
                 rb.position -= new Vector3(0f, -stepSmooth, 0f);
             }
